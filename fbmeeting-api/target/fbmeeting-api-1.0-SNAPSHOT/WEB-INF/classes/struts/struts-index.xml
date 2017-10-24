@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="GBK" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+    <package name="index" extends="structs-web-json" namespace="/">
+
+        <action name="index" method="index" class="com.bizconf.IndexAction">
+            <result>/WEB-INF/vm/index1.vm</result>
+        </action>
+
+        <action name="lalala" method="index1" class="com.bizconf.IndexAction">
+<!--
+            <result>/WEB-INF/vm/index1.vm</result>
+-->
+        </action>
+    </package>
+</struts>

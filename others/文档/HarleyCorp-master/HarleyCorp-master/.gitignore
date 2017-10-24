@@ -1,0 +1,9 @@
+bin/
+*.DS_Store
+build/
+out/
+.idea/
+.settings/
+*.log
+*.log.*
+

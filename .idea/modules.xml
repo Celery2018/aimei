@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/fbmeeting.iml" filepath="$PROJECT_DIR$/fbmeeting.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fbmeeting-api/fbmeeting-api.iml" filepath="$PROJECT_DIR$/fbmeeting-api/fbmeeting-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fbmeeting-common/fbmeeting-common.iml" filepath="$PROJECT_DIR$/fbmeeting-common/fbmeeting-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fbmeeting-dao/fbmeeting-dao.iml" filepath="$PROJECT_DIR$/fbmeeting-dao/fbmeeting-dao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fbmeeting-domain/fbmeeting-domain.iml" filepath="$PROJECT_DIR$/fbmeeting-domain/fbmeeting-domain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fbmeeting-service/fbmeeting-service.iml" filepath="$PROJECT_DIR$/fbmeeting-service/fbmeeting-service.iml" />
+    </modules>
+  </component>
+</project>

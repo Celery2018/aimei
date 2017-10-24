@@ -1,0 +1,6 @@
+#NOTE: This is an Aether internal implementation file, its format can be changed without prior notice.
+#Mon Feb 20 17:07:46 CST 2017
+@default-spring-libs-release-https\://repo.spring.io/libs-release/.lastUpdated=1487581666662
+https\://repo.spring.io/libs-release/.error=Could not transfer artifact org.springframework\:spring-context-support\:pom\:${spring.context.version) from/to spring-libs-release (https\://repo.spring.io/libs-release)\: Failed to transfer file\: https\://repo.spring.io/libs-release/org/springframework/spring-context-support/$%7Bspring.context.version)/spring-context-support-$%7Bspring.context.version).pom. Return code is\: 400 , ReasonPhrase\:Bad Request.
+http\://central.maven.org/maven2/.error=
+http\://central.maven.org/maven2/.lastUpdated=1487581666201

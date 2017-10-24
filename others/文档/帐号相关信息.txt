@@ -1,0 +1,18 @@
+¡¾»á³©¡¿
+Õ¾µã£ºfosun.bizvideo.cn
+API Key: fa78769f81f5d6fcd4329590222c503e
+Channel ID:0110
+SDK key: 6f595c6ac13e53b543a60b604958967e
+
+¡¾¸´ÐË¡¿
+CorpID£ºding005721a0bce5280235c2f4657eb6378f
+CorpSecret£ºYAH5kpqXPtRjrgDjxCzB6843Uf2rxGMdd4j6G_T2zEHKdwxQKZYvEFXAkEqFGPjC
+https://oa.dingtalk.com/
+AgentID 55684968
+
+https://open-doc.dingtalk.com/?spm=a2115p.8777639.0.0.KK87tp
+
+userId=wwww&siteSign=fosun&token=2CFEC3C7016A7DB8ADE24655A6B73115&timeStamp=1496635006102
+
+JSON.toJSONString
+JSONObject.parseObject(user, CorpUserDetail.class))

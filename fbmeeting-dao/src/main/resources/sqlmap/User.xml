@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="User">
+
+    <typeAlias alias="User" type="com.bizconf.domain.User"/>
+
+    <resultMap id="User_Map" class="User">
+        <result property="id" column="ID"/>
+        <result property="userId" column="userId"/>
+        <result property="userName" column="userName"/>
+        <result property="email" column="email"/>
+        <result property="avatar" column="avatar" />
+        <result property="tel" column="tel"/>
+        <result property="depart" column="depart"/>
+        <result property="engName" column="reserved1"/>
+    </resultMap>
+
+    <sql id="COLUMNS">
+        id,userId,userName,email,avatar,tel,depart,reserved1
+    </sql>
+
+    <sql id="TABEL_NAME">user</sql>
+
+    <sql id="COMMON_SQL">
+        <dynamic prepend=" WHERE ">
+            <isNotEmpty prepend=" AND " property="id">id=#id#</isNotEmpty>
+            <isNotEmpty prepend=" AND " property="carKey">carKey like concat('%', #carKey#, '%')</isNotEmpty>
+        </dynamic>
+    </sql>
+
+
+    <sql id="PAGE_QUEREY_SQL">
+        <dynamic prepend=" LIMIT ">
+            <isNotEmpty prepend=" " property="startIndex">#startIndex#</isNotEmpty>
+            <isNotEmpty prepend=" , " property="pageSize">#pageSize#</isNotEmpty>
+        </dynamic>
+    </sql>
+
+    <!-- 更新的动态set列表 -->
+    <sql id="UPDATE_SQL">
+        <dynamic prepend=" SET ">
+            <isNotEmpty prepend=" " property="userId">userId=#userId#</isNotEmpty>
+            <isNotEmpty prepend="," property="userName">userName=#userName#</isNotEmpty>
+            <isNotEmpty prepend="," property="email">email=#email#</isNotEmpty>
+            <isNotEmpty prepend="," property="avatar">avatar=#avatar#</isNotEmpty>
+            <isNotEmpty prepend="," property="tel">tel=#tel#</isNotEmpty>
+            <isNotEmpty prepend="," property="depart">depart=#depart#</isNotEmpty>
+            <isNotEmpty prepend="," property="engName">reserved1=#engName#</isNotEmpty>
+        </dynamic>
+    </sql>
+
+    <!-- 新增 -->
+    <insert id="ADD" parameterClass="User">
+        INSERT INTO
+        <include refid="TABEL_NAME"/>
+       (<include refid="COLUMNS"/>)
+        VALUES(#id#,#userId#,
+        #userName#,#email#,
+        #avatar#,#tel#,#depart#,#engName#)
+        <selectKey resultClass="int" keyProperty="id">
+            SELECT @@IDENTITY AS ID
+        </selectKey>
+    </insert>
+    <!-- 根据carkey更新某一项的数据 -->
+    <update id="UPDATE" parameterClass="User">
+        UPDATE
+        <include refid="TABEL_NAME"/>
+
+        <include refid="UPDATE_SQL"/>
+        WHERE userId = #userId#
+    </update>
+    <!-- 根据userId删除某一项的数据 -->
+    <delete id="DELETE_BY_USERID" parameterClass="User">
+        DELETE
+        FROM
+        <include refid="TABEL_NAME"/>
+        WHERE userId=#userId#
+    </delete>
+
+
+    <!-- 根据carKey查询 -->
+    <select id="FIND_BY_USERID" resultMap="User_Map" parameterClass="User">
+        SELECT
+        <include refid="COLUMNS"/>
+        FROM
+        <include refid="TABEL_NAME"/>
+        WHERE
+        <isNotEmpty prepend="" property="userId">userId = #userId#</isNotEmpty>
+    </select>
+
+    <!--&lt;!&ndash; 根据carKey查询 &ndash;&gt;-->
+    <!--<select id="FIND_BY_CARID" resultMap="Vehicle_Map" parameterClass="java.util.HashMap">-->
+        <!--SELECT-->
+        <!--<include refid="COLUMNS"/>-->
+        <!--FROM-->
+        <!--<include refid="TABEL_NAME"/>-->
+        <!--WHERE-->
+        <!--<isNotEmpty prepend="" property="carId">CARKEY = #carId#</isNotEmpty>-->
+    <!--</select>-->
+
+    <!--<select id="COUNT" resultClass="java.lang.Integer" parameterClass="java.util.HashMap">-->
+        <!--SELECT-->
+        <!--COUNT(id)-->
+        <!--FROM-->
+        <!--<include refid="TABEL_NAME"/>-->
+        <!--<isParameterPresent>-->
+            <!--<include refid="COMMON_SQL"/>-->
+        <!--</isParameterPresent>-->
+    <!--</select>-->
+
+    <!--<select id="GET_BY_EXAMPLE" parameterClass="Vehicle" resultMap="Vehicle_Map">-->
+        <!--SELECT-->
+        <!--<include refid="COLUMNS"/>-->
+        <!--FROM-->
+        <!--<include refid="TABEL_NAME"/>-->
+        <!--<isParameterPresent>-->
+            <!--<include refid="COMMON_SQL"/>-->
+        <!--</isParameterPresent>-->
+    <!--</select>-->
+</sqlMap>
