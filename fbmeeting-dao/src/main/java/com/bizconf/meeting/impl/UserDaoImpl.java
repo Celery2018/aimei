@@ -3,9 +3,7 @@ package com.bizconf.meeting.impl;
 import com.bizconf.AbstractBaseDao;
 import com.bizconf.domain.Meeting;
 import com.bizconf.domain.User;
-import com.bizconf.meeting.MeetingDao;
 import com.bizconf.meeting.UserDao;
-import com.bizconf.utils.JsonUtils;
 import common.util.LogHelper;
 import org.springframework.stereotype.Component;
 
