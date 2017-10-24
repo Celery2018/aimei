@@ -10,3 +10,12 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+
+/.idea/
+/fbmeeting-api/target/
+/fbmeeting-common/target/
+/fbmeeting-dao/target/
+/fbmeeting-domain/target/
+/fbmeeting-service/target/
+*.iml
