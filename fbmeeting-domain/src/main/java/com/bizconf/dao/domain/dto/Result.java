@@ -1,4 +1,4 @@
-package com.bizconf.domain.dto;
+package com.bizconf.dao.domain.dto;
 
 /**
  * A common Result

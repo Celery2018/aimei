@@ -1,4 +1,4 @@
-package com.bizconf.domain.common;
+package com.bizconf.dao.domain.common;
 
 import java.io.Serializable;
 
