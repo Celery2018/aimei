@@ -2,11 +2,10 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/fbmeeting-api" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/fbmeeting-common" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/fbmeeting-dao" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/fbmeeting-domain" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/fbmeeting-manager" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/fbmeeting-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/siloon-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/siloon-common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/siloon-dao" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/siloon-domain" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/siloon-service" charset="UTF-8" />
   </component>
 </project>

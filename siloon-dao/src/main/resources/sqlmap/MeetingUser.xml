@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="MEETINGUSER">
+
+    <typeAlias alias="MeetingUser" type="com.siloon.domain.MeetingUser"/>
+
+    <resultMap id="MeetingUser_Map" class="MeetingUser">
+        <result property="id" column="ID"/>
+        <result property="userId" column="userId"/>
+        <result property="confId" column="confId"/>
+        <result property="nature" column="nature"/>
+    </resultMap>
+
+    <resultMap id="Meeting_Map" class="Meeting">
+        <result property="id" column="ID"/>
+        <result property="protocolHostStartUrl" column="protocolHostStartUrl"/>
+        <result property="hostStartUrl" column="hostStartUrl"/>
+        <result property="confStatus" column="confStatus"/>
+        <result property="confPassword" column="confPassword" />
+        <result property="optionJbh" column="optionJbh"/>
+        <result property="startTime" column="startTime" jdbcType="DATETIME" javaType="java.lang.String"/>
+        <result property="optionVideoParticipants" column="optionVideoParticipants"/>
+        <result property="confId" column="confId"/>
+        <result property="duration" column="duration"/>
+        <result property="protocolJoinUrl" column="protocolJoinUrl"/>
+        <result property="userId" column="userId"/>
+        <result property="userName" column="userName"/>
+        <result property="confName" column="confName"/>
+        <result property="confParties" column="confParties"/>
+        <result property="joinUrl" column="joinUrl"/>
+        <result property="confDelFlag" column="confDelFlag"/>
+        <result property="optionVideoHost" column="optionVideoHost"/>
+        <result property="confNumber" column="confNumber"/>
+        <result property="roomId" column="roomId"/>
+        <result property="timeZone" column="timeZone"/>
+        <result property="remark" column="remark"/>
+        <result property="rcIps" column="rcIps"/>
+        <result property="h323pwd" column="h323pwd"/>
+        <result property="isPush" column="isPush"/>
+    </resultMap>
+
+    <sql id="COLUMNS">
+        meeting_user.id,meeting_user.confId,meeting_user.userId,nature
+    </sql>
+    <sql id="MEETING_COLUMNS">
+        conference.id,
+        conference.protocolHostStartUrl,
+        conference.hostStartUrl,conference.confStatus,
+        conference.confPassword,optionJbh,
+        startTime,optionVideoParticipants,
+        conference.confId,duration,
+        protocolJoinUrl,conference.userId,
+        userName,confName,
+        confParties,joinUrl,
+        confDelFlag,optionVideoHost,
+        confNumber,roomId,
+        timeZone,remark,
+        rcIps,h323pwd,isPush
+    </sql>
+    <resultMap id="User_Map" class="User">
+        <result property="id" column="ID"/>
+        <result property="userId" column="userId"/>
+        <result property="userName" column="userName"/>
+        <result property="email" column="email"/>
+        <result property="avatar" column="avatar" />
+        <result property="tel" column="tel"/>
+        <result property="depart" column="depart"/>
+        <result property="engName" column="reserved1"/>
+    </resultMap>
+
+    <sql id="USER_COLUMNS">
+        user.id,user.userId,user.userName,email,avatar,tel,depart,reserved1
+    </sql>
+
+    <sql id="TABEL_NAME">meeting_user</sql>
+    <sql id="MEETING_NAME">conference</sql>
+    <sql id="USER_NAME">user</sql>
+
+    <sql id="COMMON_SQL">
+        <dynamic prepend=" WHERE ">
+            <isNotEmpty prepend=" AND " property="id">id=#id#</isNotEmpty>
+            <isNotEmpty prepend=" AND " property="carKey">carKey like concat('%', #carKey#, '%')</isNotEmpty>
+        </dynamic>
+    </sql>
+
+
+    <sql id="PAGE_QUEREY_SQL">
+        <dynamic prepend=" LIMIT ">
+            <isNotEmpty prepend=" " property="startIndex">#startIndex#</isNotEmpty>
+            <isNotEmpty prepend=" , " property="pageSize">#pageSize#</isNotEmpty>
+        </dynamic>
+    </sql>
+
+    <!-- 更新的动态set列表 -->
+    <sql id="UPDATE_SQL">
+        <dynamic prepend=" SET ">
+            <isNotEmpty prepend=" " property="userId">userId=#userId#</isNotEmpty>
+            <isNotEmpty prepend="," property="confId">confId=#confId#</isNotEmpty>
+            <isNotEmpty prepend="," property="nature">nature=#nature#</isNotEmpty>
+        </dynamic>
+    </sql>
+
+    <!-- 新增 -->
+    <insert id="ADD" parameterClass="MeetingUser">
+        INSERT INTO
+        <include refid="TABEL_NAME"/>
+        (<include refid="COLUMNS"/>)
+        VALUES(#id#,#confId#,
+        #userId#,#nature#)
+        <selectKey resultClass="int" keyProperty="id">
+            SELECT @@IDENTITY AS ID
+        </selectKey>
+    </insert>
+    <!--&lt;!&ndash; 根据confId更新某一项的数据 &ndash;&gt;-->
+    <!--<update id="UPDATE" parameterClass="MeetingUser">-->
+        <!--UPDATE-->
+        <!--<include refid="TABEL_NAME"/>-->
+
+        <!--<include refid="UPDATE_SQL"/>-->
+        <!--WHERE userId = #userId#-->
+    <!--</update>-->
+    <!-- 根据userId删除某一项的数据 -->
+    <delete id="DELETE_BY_CONFID" parameterClass="MeetingUser">
+        DELETE
+        FROM
+        <include refid="TABEL_NAME"/>
+        WHERE confId=#confId#
+    </delete>
+
+    <select id="FIND_MEETINGUSER" resultMap="MeetingUser_Map" parameterClass="MeetingUser">
+        SELECT
+        <include refid="COLUMNS"/>
+        FROM
+        <include refid="TABEL_NAME"/>
+        WHERE
+        userId = #userId# and
+       confId = #confId#
+
+    </select>
+
+    <select id="FIND_MEETINGUSERS" resultMap="MeetingUser_Map" parameterClass="MeetingUser">
+        SELECT
+        <include refid="COLUMNS"/>
+        FROM
+        <include refid="TABEL_NAME"/>
+        WHERE
+        confId = #confId#
+    </select>
+
+
+    <!-- 根据userId查询该用户的会议 -->
+    <select id="FIND_BY_USERID" resultMap="Meeting_Map" parameterClass="MeetingUser">
+        SELECT
+        <include refid="MEETING_COLUMNS"/>
+        FROM
+        <include refid="MEETING_NAME"/>
+        INNER JOIN meeting_user
+        ON conference.confId=meeting_user.confId
+        WHERE
+        meeting_user.userId=#userId#
+        order by startTime asc
+    </select>
+    <!-- 根据confId查询该会议的用户 -->
+    <select id="FIND_BY_CONFID" resultMap="User_Map" parameterClass="MeetingUser">
+        SELECT
+        <include refid="USER_COLUMNS"/>
+        FROM
+        <include refid="USER_NAME"/>
+        INNER JOIN meeting_user
+        ON user.userId=meeting_user.userId
+        WHERE
+        meeting_user.confId=#confId#
+    </select>
+
+</sqlMap>

@@ -4,14 +4,14 @@
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
-          <element id="module-output" name="fbmeeting-api" />
+          <element id="module-output" name="siloon-api" />
         </element>
         <element id="directory" name="lib">
           <element id="archive" name="fbmeeting-service-1.0-SNAPSHOT.jar">
-            <element id="module-output" name="fbmeeting-service" />
+            <element id="module-output" name="siloon-service" />
           </element>
           <element id="archive" name="fbmeeting-dao-1.0-SNAPSHOT.jar">
-            <element id="module-output" name="fbmeeting-dao" />
+            <element id="module-output" name="siloon-dao" />
           </element>
           <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.30" />
           <element id="library" level="project" name="Maven: commons-dbcp:commons-dbcp:1.4" />
@@ -19,10 +19,10 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-tx:3.2.9.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-jdbc:3.2.9.RELEASE" />
           <element id="archive" name="fbmeeting-domain-1.0-SNAPSHOT.jar">
-            <element id="module-output" name="fbmeeting-domain" />
+            <element id="module-output" name="siloon-domain" />
           </element>
           <element id="archive" name="fbmeeting-common-1.0-SNAPSHOT.jar">
-            <element id="module-output" name="fbmeeting-common" />
+            <element id="module-output" name="siloon-common" />
           </element>
           <element id="library" level="project" name="Maven: org.springframework.data:spring-data-redis:1.8.0.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.data:spring-data-keyvalue:1.2.0.RELEASE" />
@@ -64,9 +64,9 @@
         </element>
       </element>
       <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/fbmeeting-api/target/fbmeeting-api-1.0-SNAPSHOT/META-INF/MANIFEST.MF" />
+        <element id="file-copy" path="$PROJECT_DIR$/siloon-api/target/fbmeeting-api-1.0-SNAPSHOT/META-INF/MANIFEST.MF" />
       </element>
-      <element id="javaee-facet-resources" facet="fbmeeting-api/web/Web" />
+      <element id="javaee-facet-resources" facet="siloon-api/web/Web" />
     </root>
   </artifact>
 </component>

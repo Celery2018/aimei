@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="GBK"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+
+
+
+
+
+
+    <!--&lt;!&ndash; 每天2点更新会议室方数  &ndash;&gt;-->
+    <!--<bean id="getPartiesTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean" autowire="no">-->
+        <!--<property name="jobDetail">-->
+            <!--&lt;!&ndash; 设置被调度的对象和方法 &ndash;&gt;-->
+            <!--<bean class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
+                <!--<property name="concurrent" value="false"/>-->
+                <!--<property name="targetObject" ref="syncMeetingListTask"/>-->
+                <!--<property name="targetMethod" value="getMeetingSize"/>-->
+            <!--</bean>-->
+        <!--</property>-->
+
+        <!--<property name="cronExpression" value="0 0 2 * * ?"/>-->
+    <!--</bean>-->
+
+    <!-- 调度工厂 -->
+    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean" autowire="no">
+        <property name="triggers">
+            <list>
+
+                <!--<ref bean="getPartiesTrigger"/>-->
+            </list>
+        </property>
+        <property name="startupDelay" value="2"/>
+    </bean>
+
+
+</beans>

@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="lib">
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/fbmeeting-api/src/main/webapp/WEB-INF/lib" />
+      <root url="file://$PROJECT_DIR$/siloon-api/src/main/webapp/WEB-INF/lib" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

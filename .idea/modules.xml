@@ -2,12 +2,16 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/fbmeeting.iml" filepath="$PROJECT_DIR$/fbmeeting.iml" />
-      <module fileurl="file://$PROJECT_DIR$/fbmeeting-api/fbmeeting-api.iml" filepath="$PROJECT_DIR$/fbmeeting-api/fbmeeting-api.iml" />
-      <module fileurl="file://$PROJECT_DIR$/fbmeeting-common/fbmeeting-common.iml" filepath="$PROJECT_DIR$/fbmeeting-common/fbmeeting-common.iml" />
-      <module fileurl="file://$PROJECT_DIR$/fbmeeting-dao/fbmeeting-dao.iml" filepath="$PROJECT_DIR$/fbmeeting-dao/fbmeeting-dao.iml" />
-      <module fileurl="file://$PROJECT_DIR$/fbmeeting-domain/fbmeeting-domain.iml" filepath="$PROJECT_DIR$/fbmeeting-domain/fbmeeting-domain.iml" />
-      <module fileurl="file://$PROJECT_DIR$/fbmeeting-service/fbmeeting-service.iml" filepath="$PROJECT_DIR$/fbmeeting-service/fbmeeting-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/siloon-common/fbmeeting-common.iml" filepath="$PROJECT_DIR$/siloon-common/fbmeeting-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/siloon-dao/fbmeeting-dao.iml" filepath="$PROJECT_DIR$/siloon-dao/fbmeeting-dao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/siloon-domain/fbmeeting-domain.iml" filepath="$PROJECT_DIR$/siloon-domain/fbmeeting-domain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/siloon-service/fbmeeting-service.iml" filepath="$PROJECT_DIR$/siloon-service/fbmeeting-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/server_common.iml" filepath="$PROJECT_DIR$/server_common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/siloon-api/siloon-api.iml" filepath="$PROJECT_DIR$/siloon-api/siloon-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/siloon-common/siloon-common.iml" filepath="$PROJECT_DIR$/siloon-common/siloon-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/siloon-dao/siloon-dao.iml" filepath="$PROJECT_DIR$/siloon-dao/siloon-dao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/siloon-domain/siloon-domain.iml" filepath="$PROJECT_DIR$/siloon-domain/siloon-domain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/siloon-service/siloon-service.iml" filepath="$PROJECT_DIR$/siloon-service/siloon-service.iml" />
     </modules>
   </component>
 </project>
