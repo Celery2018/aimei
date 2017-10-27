@@ -1,7 +1,9 @@
-<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+                      http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+		 version="3.1" metadata-complete="true">
 
-	<display-name>jd-template</display-name>
+	<display-name>siloon-template</display-name>
 	<!-- log4j -->
 	<context-param>
         <param-name>webAppRootKey</param-name>
@@ -15,74 +17,23 @@
         <listener-class>  
             org.springframework.web.util.Log4jConfigListener
         </listener-class>  
-    </listener>  
-	<!-- spring listener -->
-	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>
-<!--
-	<listener>
-		<listener-class>com.bizconff.mina.springContext.StartupListener</listener-class>
-	</listener>-->
-	<!-- spring character encoding -->
-	<!--<filter>-->
-		<!--<filter-name>Character Encoding</filter-name>-->
-		<!--<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>-->
-		<!--<init-param>-->
-			<!--<param-name>encoding</param-name>-->
-			<!--<param-value>UTF-8</param-value>-->
-		<!--</init-param>-->
-	<!--</filter>-->
+    </listener>
 
-	<!-- spring config -->
-	<context-param>
-		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:spring-config.xml</param-value>
-	</context-param>
-
-<!--
-	<filter>
-		<filter-name>CORS</filter-name>
-		<filter-class>com.thetransactioncompany.cors.CORSFilter</filter-class>
-		<init-param>
-			<param-name>cors.allowOrigin</param-name>
-			<param-value>*</param-value>
-		</init-param>
-		<init-param>
-			<param-name>cors.supportedMethods</param-name>
-			<param-value>GET, POST, HEAD, PUT, DELETE</param-value>
-		</init-param>
-		<init-param>
-			<param-name>cors.supportedHeaders</param-name>
-			<param-value>Accept, Origin, X-Requested-With, Content-Type, Last-Modified</param-value>
-		</init-param>
-		<init-param>
-			<param-name>cors.exposedHeaders</param-name>
-			<param-value>Set-Cookie</param-value>
-		</init-param>
-		<init-param>
-			<param-name>cors.supportsCredentials</param-name>
-			<param-value>true</param-value>
-		</init-param>
-	</filter>
-
-	<filter-mapping>
-		<filter-name>CORS</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>-->
-
-	<!-- url mapping -->
+	<!-- spring  MVC listener -->
 	<servlet>
 		<servlet-name>mvc-dispatcher</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-		<load-on-startup>1</load-on-startup>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:spring-config.xml</param-value>
+		</init-param>
 	</servlet>
-
 	<servlet-mapping>
 		<servlet-name>mvc-dispatcher</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
+	<!-- encoding filter-->
 	<filter>
 		<filter-name>encodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -99,16 +50,6 @@
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-<!--
-	<filter>
-		<filter-name>crosFilter</filter-name>
-		<filter-class>com.bizconf.util.CrosFilter</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>crosFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>-->
-
 
 
     <error-page>

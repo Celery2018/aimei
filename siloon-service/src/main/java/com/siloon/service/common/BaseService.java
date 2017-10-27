@@ -1,4 +1,4 @@
-package com.siloon.dao.common;
+package com.siloon.service.common;
 
 
 import com.siloon.dao.domain.common.BaseEntity;
