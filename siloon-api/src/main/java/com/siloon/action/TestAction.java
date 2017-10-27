@@ -1,10 +1,10 @@
 package com.siloon.action;
 
 
-
 import com.siloon.domain.entity.Client;
 import com.siloon.service.common.client.ClientService;
 import com.siloon.util.LogHelper;
+import org.slf4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import org.slf4j.Logger;
 
 /**
  * Created by peter on 24/10/2017.

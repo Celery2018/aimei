@@ -13,9 +13,9 @@ hs_err_pid*
 
 
 /.idea/
-/fbmeeting-api/target/
-/fbmeeting-common/target/
-/fbmeeting-dao/target/
-/fbmeeting-domain/target/
-/fbmeeting-service/target/
+/siloon-api/target/
+/siloon-common/target/
+/siloon-dao/target/
+/siloon-domain/target/
+/siloon-service/target/
 *.iml
