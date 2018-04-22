@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aimei.dao.client.ClientDao">
+    <!-- 目的：为dao接口方法提供sql语句配置 -->
+    <select id="queryById" resultType="Client" parameterType="String">
+        <!-- 具体的sql -->
+        SELECT
+        clientID,
+        clientName,
+        clientManger
+        FROM
+        client
+        WHERE
+        clientID = #{clientID}
+    </select>
+
+    <select id="queryAll" resultType="Client">
+        SELECT
+       clientID,
+        clientName,
+        clientManger
+        FROM
+        client
+    </select>
+
+    <!--<update id="reduceNumber">-->
+        <!--UPDATE book-->
+        <!--SET number = number - 1-->
+        <!--WHERE-->
+        <!--book_id = #{bookId}-->
+        <!--AND number > 0-->
+    <!--</update>-->
+</mapper>

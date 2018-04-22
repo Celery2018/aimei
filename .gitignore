@@ -13,9 +13,9 @@ hs_err_pid*
 
 
 /.idea/
-/siloon-api/target/
-/siloon-common/target/
-/siloon-dao/target/
-/siloon-domain/target/
-/siloon-service/target/
+/aimei-api/target/
+/aimei-common/target/
+/aimei-dao/target/
+/aimei-domain/target/
+/aimei-service/target/
 *.iml
