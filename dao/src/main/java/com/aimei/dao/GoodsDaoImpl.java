@@ -9,35 +9,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static com.aimei.util.DataBaseHelper.doConnect;
+
 @Component
 public class GoodsDaoImpl implements GoodsDao {
 
-    private static String driver = "com.mysql.jdbc.Driver";
-    //URL指向要访问的数据库名mydata
-    private static String url = "jdbc:mysql://localhost:3306/aimei?useUnicode=true&amp;characterEncoding=UTF8";
-    //MySQL配置时的用户名
-    private static String user = "root";
-    //MySQL配置时的密码
-    private static String password = "newpassword";
+
 
     public static void main(String[] args) {
-//        List<Goods> GoodsList = getGoods(null);
-//        for (Goods userEntity : GoodsList) {
-//            System.out.println(userEntity.getGoodsId() + "\t" + userEntity.getGoodsName() + "\t" + userEntity.getPrice());
-//        }
-//        List<Goods> list1 = getGoods("1123");
-//        for (Goods userEntity : list1) {
-//            System.out.println(userEntity.getGoodsId() + "\t" + userEntity.getGoodsName() + "\t" + userEntity.getPrice());
-//        }
-//        //更新
-//        Goods goods1=new Goods();
-//        goods1.setGoodsId("2");
-//        goods1.setGoodsName("xiao12365");
-//        goods1.setPrice(100.00);
-//        goods1.setStockId("2");
-//        goods1.setGoodsTypeId("2");
-//        boolean b=updateGoodsData(goods1);
-//        System.out.println(b);
 
         //删除
         boolean b=deleteGoodsData("2");
@@ -91,21 +70,7 @@ public class GoodsDaoImpl implements GoodsDao {
     }
 
 
-    public static Connection doConnect() {
-        Connection con;
-        try {
-            Class.forName(driver);
-            con = (Connection) DriverManager.getConnection(url, user, password);
-            if (!con.isClosed()) {
-                return con;
-            }
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
+
 
     public static  boolean addGoodsData (Goods goods){
         PreparedStatement psql;

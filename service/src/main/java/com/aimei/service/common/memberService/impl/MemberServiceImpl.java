@@ -1,11 +1,11 @@
 package com.aimei.service.common.memberService.impl;
 
 import com.aimei.dao.MemberDao;
+import com.aimei.domain.entity.Member;
 import com.aimei.service.common.memberService.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Member;
 import java.util.List;
 
 /**
@@ -36,6 +36,11 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public boolean deleteMember(String memberId) {
         return memberDao.deleteMember(memberId);
+    }
+
+    @Override
+    public List<Member> getMemberByName(String memberName) {
+        return memberDao.getMemberByName(memberName);
     }
 
 

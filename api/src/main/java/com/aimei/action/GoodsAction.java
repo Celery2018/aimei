@@ -19,50 +19,58 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * Created by peter on 24/10/2017.
+ * 商品类，包含商品的各类操作
  */
 @Controller
 @RequestMapping("/goods")
 public class GoodsAction {
     private static final Logger logger= LogHelper.log_consoleFile;
 
-    @Resource
-    private ClientService clientService;
 
     @Autowired
     private GoodsService goodsService;
 
-//获取商品列表
+    /**
+     * 获取商品列表（当传入商品id时获取高商品的信息，不传时获取所有商品列表）
+     * @param goodsId
+     * @return
+     */
     @RequestMapping(value="/getGoodsList",method = {RequestMethod.GET})
     public @ResponseBody List<Goods> listUser(String goodsId) {
         List<Goods> list=goodsService.getGoodsList(goodsId);
         return list;
     }
 
+    /**
+     * 添加商品
+     * @param goods
+     * @return
+     */
     @RequestMapping(value="/addGoods",method = {RequestMethod.POST})
     public @ResponseBody String addGoods(@RequestBody Goods goods) {
        boolean add=goodsService.addGoods(goods);
         return String.valueOf(add);
     }
 
+    /**
+     * 更新商品信息
+     * @param goods
+     * @return
+     */
     @RequestMapping(value="/updateGoods",method = {RequestMethod.POST})
     public @ResponseBody String updateGoods(@RequestBody Goods goods) {
         boolean add=goodsService.updateGoods(goods);
         return String.valueOf(add);
     }
 
+    /**
+     * 删除商品信息
+     * @param goodsId
+     * @return
+     */
     @RequestMapping(value="/deleteGoods",method = {RequestMethod.GET})
     public @ResponseBody String deleteGoods( String goodsId) {
         boolean add=goodsService.deleteGoods(goodsId);
         return String.valueOf(add);
     }
-//    @RequestMapping(value = "/query",method = {RequestMethod.POST})
-//    public @ResponseBody
-//    Client query(HttpServletRequest request, @RequestBody String clientID){
-//
-//    }
-//
-//    @RequestMapping(value = "/getAll",method = {RequestMethod.GET})
-//    public @ResponseBody
-//
 }

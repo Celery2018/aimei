@@ -10,4 +10,5 @@ public interface MemberDao {
     boolean addMember(Member member);
     boolean updateMember(Member member);
     boolean deleteMember(String memberId);
+    List<Member> getMemberByName(String memberName);
 }
