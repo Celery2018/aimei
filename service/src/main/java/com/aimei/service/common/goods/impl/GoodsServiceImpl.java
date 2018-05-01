@@ -1,6 +1,7 @@
 package com.aimei.service.common.goods.impl;
 
 import com.aimei.dao.GoodsDao;
+import com.aimei.domain.entity.Goods;
 import com.aimei.service.common.goods.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,6 +36,11 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public boolean deleteGoods(String GoodsId) {
         return GoodsDao.deleteGoods(GoodsId);
+    }
+
+    @Override
+    public List<Goods> getGoodsByName(String goodsName) {
+        return null;
     }
 
 

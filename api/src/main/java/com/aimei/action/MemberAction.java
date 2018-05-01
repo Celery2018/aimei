@@ -1,6 +1,7 @@
 package com.aimei.action;
 
 
+import com.aimei.dao.domain.dto.Result;
 import com.aimei.domain.entity.Client;
 import com.aimei.domain.entity.Member;
 import com.aimei.service.common.client.ClientService;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.xml.ws.Response;
 import java.util.List;
 
 /**
@@ -37,9 +39,9 @@ public class MemberAction {
      * @return
      */
     @RequestMapping(value="/getUserList",method = {RequestMethod.GET})
-    public @ResponseBody List<Member> listUser(String memberId) {
+    public @ResponseBody Result listUser(String memberId) {
         List<Member> list=memberService.getMemberList(memberId);
-        return list;
+        return new Result(true,list);
     }
 
     /**
@@ -48,9 +50,22 @@ public class MemberAction {
      * @return
      */
     @RequestMapping(value="/addMember",method = {RequestMethod.POST})
-    public @ResponseBody String addMember(@RequestBody Member member) {
-       boolean add=memberService.addMember(member);
-        return String.valueOf(add);
+    public @ResponseBody
+    Result addMember(@RequestBody Member member) {
+        //先检查该用户名是否已被占用
+        Result result=null;
+        try {
+            List<Member> members=memberService.getMemberByName(member.getName());
+            if(members!=null&&members.size()>0)
+                result=new Result(false,"该用户已存在");
+            else {
+                boolean add=memberService.addMember(member);
+                result=new Result(add,add?"注册成功":"注册失败");
+            }
+        }catch (Exception e){
+                result=new Result(false,"注册失败");
+        }
+        return result;
     }
 
 
@@ -60,9 +75,16 @@ public class MemberAction {
      * @return
      */
     @RequestMapping(value="/updateMember",method = {RequestMethod.POST})
-    public @ResponseBody String updateMember(@RequestBody Member member) {
-        boolean add=memberService.updateMember(member);
-        return String.valueOf(add);
+    public @ResponseBody Result updateMember(@RequestBody Member member) {
+        Result result=null;
+        try {
+            boolean add=memberService.updateMember(member);
+            result=new Result(add,add?"更新成功！":"更新失败");
+        }catch (Exception e){
+            result=new Result(false,"更新失败");
+        }
+
+        return result;
     }
 
     /**
@@ -71,9 +93,15 @@ public class MemberAction {
      * @return
      */
     @RequestMapping(value="/deleteMember",method = {RequestMethod.GET})
-    public @ResponseBody String deleteMember( String memberId) {
-        boolean add=memberService.deleteMember(memberId);
-        return String.valueOf(add);
+    public @ResponseBody Result deleteMember( String memberId) {
+        Result result=null;
+        try {
+            boolean add=memberService.deleteMember(memberId);
+            result=new Result(add,add?"删除成功！":"删除失败");
+        }catch (Exception e){
+            result=new Result(false,"删除失败");
+        }
+        return result;
     }
 
 }

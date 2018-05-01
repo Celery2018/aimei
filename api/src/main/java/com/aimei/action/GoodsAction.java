@@ -1,6 +1,7 @@
 package com.aimei.action;
 
 
+import com.aimei.dao.domain.dto.Result;
 import com.aimei.domain.entity.Goods;
 import com.aimei.domain.entity.Member;
 import com.aimei.service.common.client.ClientService;
@@ -36,9 +37,10 @@ public class GoodsAction {
      * @return
      */
     @RequestMapping(value="/getGoodsList",method = {RequestMethod.GET})
-    public @ResponseBody List<Goods> listUser(String goodsId) {
+    public @ResponseBody
+    Result listUser(String goodsId) {
         List<Goods> list=goodsService.getGoodsList(goodsId);
-        return list;
+        return new Result(true,list);
     }
 
     /**
@@ -47,9 +49,20 @@ public class GoodsAction {
      * @return
      */
     @RequestMapping(value="/addGoods",method = {RequestMethod.POST})
-    public @ResponseBody String addGoods(@RequestBody Goods goods) {
-       boolean add=goodsService.addGoods(goods);
-        return String.valueOf(add);
+    public @ResponseBody Result addGoods(@RequestBody Goods goods) {
+        Result result=null;
+        try {
+            List<Goods> goodss=goodsService.getGoodsByName(goods.getGoodsName());
+            if(goodss!=null&&goodss.size()>0)
+                result=new Result(false,"该商品已存在");
+            else {
+                boolean add=goodsService.addGoods(goods);
+                result=new Result(add,add?"商品添加成功":"商品添加失败");
+            }
+        }catch (Exception e){
+            result=new Result(false ,"商品添加失败");
+        }
+        return result;
     }
 
     /**
@@ -58,9 +71,16 @@ public class GoodsAction {
      * @return
      */
     @RequestMapping(value="/updateGoods",method = {RequestMethod.POST})
-    public @ResponseBody String updateGoods(@RequestBody Goods goods) {
-        boolean add=goodsService.updateGoods(goods);
-        return String.valueOf(add);
+    public @ResponseBody Result updateGoods(@RequestBody Goods goods) {
+        Result result=null;
+        try {
+            boolean add=goodsService.updateGoods(goods);
+            result=new Result(add,add?"更新成功！":"更新失败");
+        }catch (Exception e){
+            result=new Result(false,"更新失败");
+        }
+
+        return result;
     }
 
     /**
@@ -69,8 +89,14 @@ public class GoodsAction {
      * @return
      */
     @RequestMapping(value="/deleteGoods",method = {RequestMethod.GET})
-    public @ResponseBody String deleteGoods( String goodsId) {
-        boolean add=goodsService.deleteGoods(goodsId);
-        return String.valueOf(add);
+    public @ResponseBody Result deleteGoods( String goodsId) {
+        Result result=null;
+        try {
+            boolean add=goodsService.deleteGoods(goodsId);
+            result=new Result(add,add?"删除成功！":"删除失败");
+        }catch (Exception e){
+            result=new Result(false,"删除失败");
+        }
+        return result;
     }
 }

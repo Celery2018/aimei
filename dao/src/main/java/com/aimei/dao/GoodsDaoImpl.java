@@ -69,6 +69,48 @@ public class GoodsDaoImpl implements GoodsDao {
         return null;
     }
 
+    public static List<Goods> getGoodsByNames(String goodsName) {
+        try {
+            Connection con = doConnect();
+            if (con == null)
+                return null;
+            //2.创建statement类对象，用来执行SQL语句！！
+            Statement statement = con.createStatement();
+            //要执行的SQL语句
+            String sql = "select * from goods WHERE goodsId =" +  "'"+goodsName+"'";
+            //3.ResultSet类，用来存放获取的结果集！！
+            ResultSet rs = statement.executeQuery(sql);
+            List<Goods> list = new ArrayList<>();
+            while (rs.next()) {
+                String goodsid = rs.getString("goodsId");
+                String stockId = rs.getString("stockId");
+                String goodsTypeId = rs.getString("goodsTypeId");
+                String goodsName1 = rs.getString("goodsName");
+                String goodsComment = rs.getString("goodsComment");
+                Double price = rs.getDouble("price");
+                Date purchaseDate = rs.getDate("purchaseDate");
+                Goods userEntity = new Goods();
+                userEntity.setGoodsId(goodsid);
+                userEntity.setStockId(stockId);
+                userEntity.setGoodsTypeId(goodsTypeId);
+                userEntity.setGoodsName(goodsName1);
+                userEntity.setGoodsComment(goodsComment);
+                userEntity.setPrice(price);
+                userEntity.setPurchaseDate(purchaseDate);
+                list.add(userEntity);
+            }
+            rs.close();
+            con.close();
+            return list;
+        } catch (Exception e) {
+            System.out.println("抓取错误!");
+            e.printStackTrace();
+        } finally {
+            System.out.println("数据库数据成功获取！！");
+        }
+        return null;
+    }
+
 
 
 
@@ -158,5 +200,10 @@ public class GoodsDaoImpl implements GoodsDao {
     @Override
     public boolean deleteGoods(String goodsId) {
         return deleteGoodsData(goodsId);
+    }
+
+    @Override
+    public List<Goods> getGoodsByName(String goodsName) {
+        return getGoodsByNames(goodsName);
     }
 }

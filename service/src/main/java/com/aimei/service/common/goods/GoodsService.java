@@ -14,4 +14,6 @@ public interface GoodsService {
     boolean addGoods(Goods goods);
     boolean updateGoods(Goods goods);
     boolean deleteGoods(String goodsId);
+    List<Goods> getGoodsByName(String goodsName);
+
 }

@@ -10,4 +10,5 @@ public interface GoodsDao {
     boolean addGoods(Goods goods);
     boolean updateGoods(Goods goods);
     boolean deleteGoods(String goodId);
+    List<Goods> getGoodsByName(String goodsName);
 }
