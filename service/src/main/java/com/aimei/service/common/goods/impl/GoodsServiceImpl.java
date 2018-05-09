@@ -1,6 +1,6 @@
 package com.aimei.service.common.goods.impl;
 
-import com.aimei.dao.GoodsDao;
+import com.aimei.dao.goods.GoodsDao;
 import com.aimei.domain.entity.Goods;
 import com.aimei.service.common.goods.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;

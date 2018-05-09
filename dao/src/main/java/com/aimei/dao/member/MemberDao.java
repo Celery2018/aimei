@@ -1,4 +1,4 @@
-package com.aimei.dao;
+package com.aimei.dao.member;
 
 
 import com.aimei.domain.entity.Member;

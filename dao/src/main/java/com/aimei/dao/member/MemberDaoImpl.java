@@ -1,8 +1,7 @@
-package com.aimei.dao;
+package com.aimei.dao.member;
 
 import com.aimei.domain.entity.Member;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.sql.*;
 import java.util.ArrayList;

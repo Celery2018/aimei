@@ -1,6 +1,6 @@
 package com.aimei.service.common.memberService.impl;
 
-import com.aimei.dao.MemberDao;
+import com.aimei.dao.member.MemberDao;
 import com.aimei.domain.entity.Member;
 import com.aimei.service.common.memberService.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
