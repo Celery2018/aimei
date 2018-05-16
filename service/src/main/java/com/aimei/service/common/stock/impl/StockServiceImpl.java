@@ -21,8 +21,8 @@ public class StockServiceImpl implements StockService {
 
 
     @Override
-    public List<Stock> getStockLost(String goodsId) {
-        return stockDao.getStockList(goodsId);
+    public Stock getStock(String goodsId) {
+        return stockDao.getStock(goodsId);
     }
 
 
@@ -31,7 +31,15 @@ public class StockServiceImpl implements StockService {
         return stockDao.updateStock(stock);
     }
 
+    @Override
+    public boolean addStock(Stock stock) {
+        return stockDao.addStock(stock);
+    }
 
+    @Override
+    public boolean deleteStock(String stockId) {
+        return stockDao.deleteStock(stockId);
+    }
 
 
 }

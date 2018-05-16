@@ -14,11 +14,10 @@ import static com.aimei.util.DataBaseHelper.doConnect;
 public class GoodsDaoImpl implements GoodsDao {
 
 
-
     public static void main(String[] args) {
 
         //删除
-        boolean b=deleteGoodsData("2");
+        boolean b = deleteGoodsData("2");
     }
 
     public static List<Goods> getGoods(String goodsId) {
@@ -31,9 +30,9 @@ public class GoodsDaoImpl implements GoodsDao {
             //要执行的SQL语句
             String sql = null;
             if (goodsId == null || goodsId == "") {
-                sql = "select * from goods";
+                sql = "select goods.*,stock.numbers as number from goods left join stock on goods.goodsId=stock.goodsId where stock.wetherPurchase=0";
             } else {
-                sql = "select * from goods WHERE goodsId =" + goodsId;
+                sql = "select goods.*,stock.numbers as number from goods left join stock on goods.goodsId=stock.goodsId WHERE stock.wetherPurchase=0 and stock.goodsId =" + goodsId;
             }
             //3.ResultSet类，用来存放获取的结果集！！
             ResultSet rs = statement.executeQuery(sql);
@@ -46,10 +45,12 @@ public class GoodsDaoImpl implements GoodsDao {
                 String goodsComment = rs.getString("goodsComment");
                 Double price = rs.getDouble("price");
                 Date purchaseDate = rs.getDate("purchaseDate");
+                int number = rs.getInt("number");
                 Goods userEntity = new Goods();
                 userEntity.setGoodsId(goodsid);
                 userEntity.setStockId(stockId);
                 userEntity.setGoodsTypeId(goodsTypeId);
+                userEntity.setNumber(number);
                 userEntity.setGoodsName(goodsName);
                 userEntity.setGoodsComment(goodsComment);
                 userEntity.setPrice(price);
@@ -76,7 +77,7 @@ public class GoodsDaoImpl implements GoodsDao {
             //2.创建statement类对象，用来执行SQL语句！！
             Statement statement = con.createStatement();
             //要执行的SQL语句
-            String sql = "select * from goods WHERE goodsId =" +  "'"+goodsName+"'";
+            String sql = "select * from goods WHERE goodsName =" + "'" + goodsName + "'";
             //3.ResultSet类，用来存放获取的结果集！！
             ResultSet rs = statement.executeQuery(sql);
             List<Goods> list = new ArrayList<>();
@@ -111,39 +112,37 @@ public class GoodsDaoImpl implements GoodsDao {
     }
 
 
-
-
-    public static  boolean addGoodsData (Goods goods){
+    public static boolean addGoodsData(Goods goods) {
         PreparedStatement psql;
         ResultSet res;
         try {
-            Connection con=doConnect();
+            Connection con = doConnect();
             //预处理添加数据，其中有两个参数--“？”
             psql = con.prepareStatement("insert into goods (goodsId,stockId,goodsTypeId,goodsName,goodsComment,price,purchaseDate) "
                     + "values(?,?,?,?,?,?,?)");
-                psql.setString(1, goods.getGoodsId());
-                psql.setString(2, goods.getStockId());
-                psql.setString(3, goods.getGoodsTypeId());
-                psql.setString(4, goods.getGoodsName());
-                psql.setString(5, goods.getGoodsComment());
-                psql.setDouble(6, goods.getPrice());
-                psql.setDate(7, (java.sql.Date) goods.getPurchaseDate());
-                psql.executeUpdate();
+            psql.setString(1, goods.getGoodsId());
+            psql.setString(2, goods.getStockId());
+            psql.setString(3, goods.getGoodsTypeId());
+            psql.setString(4, goods.getGoodsName());
+            psql.setString(5, goods.getGoodsComment());
+            psql.setDouble(6, goods.getPrice());
+            psql.setDate(7, new java.sql.Date(goods.getPurchaseDate().getTime()));
+            psql.executeUpdate();
             con.isClosed();
             System.out.println("插入数据成功");
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("错误");
         }
         return false;
     }
 
 
-    public static  boolean updateGoodsData (Goods goods){
+    public static boolean updateGoodsData(Goods goods) {
         PreparedStatement psql;
         ResultSet res;
         try {
-            Connection con=doConnect();
+            Connection con = doConnect();
             psql = con.prepareStatement("update goods set goodsId = ? ,stockId= ? , goodsTypeId=?, goodsName=?, goodsComment=?, price=?,purchaseDate=? where goodsId = ?");
             psql.setString(1, goods.getGoodsId());
             psql.setString(2, goods.getStockId());
@@ -151,23 +150,23 @@ public class GoodsDaoImpl implements GoodsDao {
             psql.setString(4, goods.getGoodsName());
             psql.setString(5, goods.getGoodsComment());
             psql.setDouble(6, goods.getPrice());
-            psql.setDate(7, (java.sql.Date) goods.getPurchaseDate());
-            psql.setString(8,goods.getGoodsId());
+            psql.setDate(7, new java.sql.Date(goods.getPurchaseDate().getTime()));
+            psql.setString(8, goods.getGoodsId());
             psql.executeUpdate();
             con.isClosed();
             System.out.println("更新数据成功");
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("错误");
         }
         return false;
     }
 
-    public static  boolean deleteGoodsData (String goodsId){
+    public static boolean deleteGoodsData(String goodsId) {
         PreparedStatement psql;
         ResultSet res;
         try {
-            Connection con=doConnect();
+            Connection con = doConnect();
             psql = con.prepareStatement("delete from goods where goodsId=?");
             psql.setString(1, goodsId);
 
@@ -175,7 +174,7 @@ public class GoodsDaoImpl implements GoodsDao {
             con.isClosed();
             System.out.println("删除数据成功");
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("错误");
         }
         return false;

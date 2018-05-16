@@ -7,9 +7,8 @@ import java.util.List;
 
 public interface StockDao {
 
-    List<Stock> getStockList(String goodsId);
-    boolean addGoods(Goods goods);
+    Stock getStock(String goodsId);
+    boolean addStock(Stock stock);
     boolean updateStock(Stock stock);
-    boolean deleteGoods(String goodId);
-    List<Goods> getGoodsByName(String goodsName);
+    boolean deleteStock(String goodId);
 }

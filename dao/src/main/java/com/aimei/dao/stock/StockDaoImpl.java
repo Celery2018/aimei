@@ -19,12 +19,27 @@ public class StockDaoImpl implements StockDao {
 
 
     public static void main(String[] args) {
-
-        //删除
-        boolean b = deleteGoodsData("2");
+//        Stock stock = new Stock();
+//        stock.setGoodsId("12354");
+//        stock.setMemberId("27");
+//        stock.setNumbers("50");
+//        stock.setPurchaseTime(new Date());
+//        stock.setWetherPurchase(1);
+//        addStockData(stock);
+//        deleteStockData("1");
+//        List<Stock> stocks = getStockByGoodsId("12354");
+//        for (Stock stock : stocks) {
+//            System.out.println(stock.getId());
+//        }
     }
 
-    public static List<Stock> getStockByGoodsId(String goodsId) {
+    /**
+     * 根据商品ID来获取库存信息
+     *
+     * @param goodsId
+     * @return
+     */
+    public static Stock getStockByGoodsId(String goodsId) {
         try {
             Connection con = doConnect();
             if (con == null)
@@ -40,11 +55,11 @@ public class StockDaoImpl implements StockDao {
             while (rs.next()) {
                 String goodsid = rs.getString("goodsId");
                 String stockId = rs.getString("stockId");
-                String memberId= rs.getString("memberId");
+                String memberId = rs.getString("memberId");
                 String numbers = rs.getString("numbers");
                 Date purchaseTime = rs.getDate("purchaseTimes");
                 int wetherPurchase = rs.getInt("wetherPurchase");
-                Stock stock=new Stock();
+                Stock stock = new Stock();
                 stock.setGoodsId(goodsid);
                 stock.setId(stockId);
                 stock.setMemberId(memberId);
@@ -55,49 +70,10 @@ public class StockDaoImpl implements StockDao {
             }
             rs.close();
             con.close();
-            return list;
-        } catch (Exception e) {
-            System.out.println("抓取错误!");
-            e.printStackTrace();
-        } finally {
-            System.out.println("数据库数据成功获取！！");
-        }
-        return null;
-    }
-
-    public static List<Goods> getGoodsByNames(String goodsName) {
-        try {
-            Connection con = doConnect();
-            if (con == null)
+            if (list.size() > 0)
+                return list.get(0);
+            else
                 return null;
-            //2.创建statement类对象，用来执行SQL语句！！
-            Statement statement = con.createStatement();
-            //要执行的SQL语句
-            String sql = "select * from goods WHERE goodsId =" + "'" + goodsName + "'";
-            //3.ResultSet类，用来存放获取的结果集！！
-            ResultSet rs = statement.executeQuery(sql);
-            List<Goods> list = new ArrayList<>();
-            while (rs.next()) {
-                String goodsid = rs.getString("goodsId");
-                String stockId = rs.getString("stockId");
-                String goodsTypeId = rs.getString("goodsTypeId");
-                String goodsName1 = rs.getString("goodsName");
-                String goodsComment = rs.getString("goodsComment");
-                Double price = rs.getDouble("price");
-                Date purchaseDate = rs.getDate("purchaseDate");
-                Goods userEntity = new Goods();
-                userEntity.setGoodsId(goodsid);
-                userEntity.setStockId(stockId);
-                userEntity.setGoodsTypeId(goodsTypeId);
-                userEntity.setGoodsName(goodsName1);
-                userEntity.setGoodsComment(goodsComment);
-                userEntity.setPrice(price);
-                userEntity.setPurchaseDate(purchaseDate);
-                list.add(userEntity);
-            }
-            rs.close();
-            con.close();
-            return list;
         } catch (Exception e) {
             System.out.println("抓取错误!");
             e.printStackTrace();
@@ -108,21 +84,25 @@ public class StockDaoImpl implements StockDao {
     }
 
 
-    public static boolean addGoodsData(Goods goods) {
+    /**
+     * 新增一个库存
+     *
+     * @param stock
+     * @return
+     */
+    public static boolean addStockData(Stock stock) {
         PreparedStatement psql;
         ResultSet res;
         try {
             Connection con = doConnect();
             //预处理添加数据，其中有两个参数--“？”
-            psql = con.prepareStatement("insert into goods (goodsId,stockId,goodsTypeId,goodsName,goodsComment,price,purchaseDate) "
-                    + "values(?,?,?,?,?,?,?)");
-            psql.setString(1, goods.getGoodsId());
-            psql.setString(2, goods.getStockId());
-            psql.setString(3, goods.getGoodsTypeId());
-            psql.setString(4, goods.getGoodsName());
-            psql.setString(5, goods.getGoodsComment());
-            psql.setDouble(6, goods.getPrice());
-            psql.setDate(7, (java.sql.Date) goods.getPurchaseDate());
+            psql = con.prepareStatement("insert into stock (goodsId,memberId,numbers,purchaseTimes,wetherPurchase) "
+                    + "values(?,?,?,?,?)");
+            psql.setString(1, stock.getGoodsId());
+            psql.setString(2, stock.getMemberId());
+            psql.setString(3, stock.getNumbers());
+            psql.setDate(4, new java.sql.Date(stock.getPurchaseTime().getTime()));
+            psql.setInt(5, stock.getWetherPurchase());
             psql.executeUpdate();
             con.isClosed();
             System.out.println("插入数据成功");
@@ -156,12 +136,30 @@ public class StockDaoImpl implements StockDao {
         return false;
     }
 
-    public static boolean deleteGoodsData(String goodsId) {
+    public static boolean deleteStockData(String stockId) {
         PreparedStatement psql;
         ResultSet res;
         try {
             Connection con = doConnect();
-            psql = con.prepareStatement("delete from goods where goodsId=?");
+            psql = con.prepareStatement("delete from stock where stockId=?");
+            psql.setString(1, stockId);
+
+            psql.executeUpdate();
+            con.isClosed();
+            System.out.println("删除数据成功");
+            return true;
+        } catch (Exception e) {
+            System.out.println("错误");
+        }
+        return false;
+    }
+
+    public static boolean deleteStockByGoodsId(String goodsId) {
+        PreparedStatement psql;
+        ResultSet res;
+        try {
+            Connection con = doConnect();
+            psql = con.prepareStatement("delete from stock where goodsId=?");
             psql.setString(1, goodsId);
 
             psql.executeUpdate();
@@ -176,13 +174,13 @@ public class StockDaoImpl implements StockDao {
 
 
     @Override
-    public List<Stock> getStockList(String goodsId) {
+    public Stock getStock(String goodsId) {
         return getStockByGoodsId(goodsId);
     }
 
     @Override
-    public boolean addGoods(Goods goods) {
-        return addGoodsData(goods);
+    public boolean addStock(Stock stock) {
+        return addStockData(stock);
     }
 
     @Override
@@ -191,12 +189,8 @@ public class StockDaoImpl implements StockDao {
     }
 
     @Override
-    public boolean deleteGoods(String goodsId) {
-        return deleteGoodsData(goodsId);
+    public boolean deleteStock(String goodsId) {
+        return deleteStockByGoodsId(goodsId);
     }
 
-    @Override
-    public List<Goods> getGoodsByName(String goodsName) {
-        return getGoodsByNames(goodsName);
-    }
 }

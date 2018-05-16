@@ -9,7 +9,7 @@ public class Result<T> {
 
 	private T data;
 
-	private String error;
+	private String msg;
 
 	public Result() {
 	}
@@ -21,9 +21,9 @@ public class Result<T> {
 	}
 
 	// error Data Response
-	public Result(boolean success, String error) {
+	public Result(boolean success, String msg) {
 		this.success = success;
-		this.error = error;
+		this.msg = msg;
 	}
 
 	public boolean isSuccess() {
@@ -42,17 +42,17 @@ public class Result<T> {
 		this.data = data;
 	}
 
-	public String getError() {
-		return error;
+	public String getMsg() {
+		return msg;
 	}
 
-	public void setError(String error) {
-		this.error = error;
+	public void setMsg(String msg) {
+		this.msg = msg;
 	}
 
 	@Override
 	public String toString() {
-		return "JsonResult [success=" + success + ", data=" + data + ", error=" + error + "]";
+		return "JsonResult [success=" + success + ", data=" + data + ", msg=" + msg + "]";
 	}
 
 }

@@ -10,6 +10,7 @@ public class Goods {
     private String goodsComment;
     private double price;
     private Date purchaseDate;
+    private int number;
 
     public String getGoodsId() {
         return goodsId;
@@ -65,5 +66,13 @@ public class Goods {
 
     public void setPurchaseDate(Date purchaseDate) {
         this.purchaseDate = purchaseDate;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
     }
 }

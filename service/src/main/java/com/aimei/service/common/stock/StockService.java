@@ -10,6 +10,8 @@ import java.util.List;
  */
 
 public interface StockService {
-    List<Stock> getStockLost(String goodsId);
+    Stock getStock(String goodsId);
     boolean updateStock(Stock stock);
+    boolean addStock(Stock stock);
+    boolean deleteStock(String stockId);
 }

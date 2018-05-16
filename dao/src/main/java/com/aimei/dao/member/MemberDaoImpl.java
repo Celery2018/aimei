@@ -193,7 +193,7 @@ public class MemberDaoImpl implements MemberDao {
         ResultSet res;
         try {
             Connection con = doConnect();
-            psql = con.prepareStatement("update member set name = ? ,password= ? , realName=?, sex=?, phone=?, email=?,address=?,createTime=? where merberId = ?");
+            psql = con.prepareStatement("update member set name = ? ,password= ? , realName=?, sex=?, phone=?, email=?,address=?,createTime=? where memberId = ?");
             psql.setString(1, member.getName());
             psql.setString(2, member.getPassword());
             psql.setString(3, member.getRealname());
@@ -201,7 +201,7 @@ public class MemberDaoImpl implements MemberDao {
             psql.setString(5, member.getPhone());
             psql.setString(6, member.getEmail());
             psql.setString(7, member.getAddress());
-            psql.setDate(8, (java.sql.Date) member.getCreateTime());
+            psql.setDate(8, new java.sql.Date(member.getCreateTime().getTime()) );
             psql.setString(9, member.getMerberId());
             psql.executeUpdate();
             con.isClosed();
@@ -224,7 +224,7 @@ public class MemberDaoImpl implements MemberDao {
         ResultSet res;
         try {
             Connection con = doConnect();
-            psql = con.prepareStatement("delete from member where merberId=?");
+            psql = con.prepareStatement("delete from member where memberId=?");
             psql.setString(1, memberId);
 
             psql.executeUpdate();

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.xml.ws.Response;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -78,6 +79,7 @@ public class MemberAction {
     public @ResponseBody Result updateMember(@RequestBody Member member) {
         Result result=null;
         try {
+            member.setCreateTime(new Date());
             boolean add=memberService.updateMember(member);
             result=new Result(add,add?"更新成功！":"更新失败");
         }catch (Exception e){
